@@ -52,7 +52,7 @@ int Index_KMP(SString S, SString T){
         // 若数组下标从1开始，则return i-T.length
         return i-T.length-1;  // 匹配成功
     else
-        return 0;
+        return -1;
 }
 
 int main(int argc, const char * argv[]) {
