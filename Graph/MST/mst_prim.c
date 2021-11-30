@@ -25,6 +25,27 @@ typedef struct{
     int flag;
 }ArrayNode;
 
+void showGraph(PGraph g){
+    
+    for(int i=-1; i<g->vertexNum; i++){
+        for(int j=-1; j<g->vertexNum; j++){
+            if(i<0){
+                if(j<0)
+                    printf("%2c",' ');
+                else
+                    printf("%2c", 'A'+j);
+            }
+            else{
+                if(j<0)
+                    printf("%2c", 'A'+i);
+                else
+                    printf("%2d", g->arc[i][j]);
+            }
+        }
+        printf("\n");
+    }
+}
+
 // 构造无向网
 /*
  *   A B C D E F
@@ -52,23 +73,7 @@ void createGraph(PGraph g){
     g->arc[5][2] = 4; g->arc[5][3] = 2; g->arc[5][4] = 6;
     
     printf("the adjacency matrix:\n");
-    for(i=-1; i<g->vertexNum; i++){
-        for(j=-1; j<g->vertexNum; j++){
-            if(i<0){
-                if(j<0)
-                    printf("%2c",' ');
-                else
-                    printf("%2c", 'A'+j);
-            }
-            else{
-                if(j<0)
-                    printf("%2c", 'A'+i);
-                else
-                    printf("%2d", g->arc[i][j]);
-            }
-        }
-        printf("\n");
-    }
+    showGraph(g);
 }
 
 // 初始化最小生成树
@@ -136,6 +141,8 @@ void prim(PGraph g, PGraph tree){
             break;
     }
     printf("\n");
+    printf("the MST:\n");
+    showGraph(tree);
 }
 
 int main(int argc, const char * argv[]) {
@@ -145,6 +152,6 @@ int main(int argc, const char * argv[]) {
     initTree(&tree);
     printf("Prim's Sequence:\n");
     prim(&graph, &tree);
-    
+
     return 0;
 }
